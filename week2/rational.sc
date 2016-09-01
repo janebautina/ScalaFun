@@ -11,7 +11,15 @@ object rational {
   x - y - z
   x.max(y)
 
+  /**
+    * Rational Numbers Representation
+    *
+    * @param i  - numerator value
+    * @param i1  - denominator value
+    */
   class Rational(i: Int, i1: Int) {
+    require(i1 != 0, "denominator must not be equal zero")
+
     private def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
 
     private val g = gcd(i, i1)
