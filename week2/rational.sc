@@ -10,6 +10,7 @@ object rational {
   x + y + z
   x - y - z
   x.max(y)
+  new Rational(2)
 
   /**
     * Rational Numbers Representation
@@ -20,18 +21,21 @@ object rational {
   class Rational(i: Int, i1: Int) {
     require(i1 != 0, "denominator must not be equal zero")
 
+    def this(x:Int) = this(x, 1)
+
     private def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
 
-    private val g = gcd(i, i1)
+    val numer = i
 
-    val numer = i / g
-
-    val denom = i1 / g
+    val denom = i1
 
     def +(that: Rational): Rational =
       new Rational(that.denom * numer + denom * that.numer, that.denom * denom)
 
-    override def toString = numer + "/" + denom
+    override def toString = {
+      def g = gcd(numer, denom)
+      numer/g + "/" + denom/g
+    }
 
     def unary_- = new Rational(-numer, denom)
 
